@@ -16,7 +16,7 @@ public final class Report extends JavaPlugin {
         this.getConfig().options().copyDefaults();
         saveDefaultConfig();
 
-        getCommand("report").setExecutor(new ReportCMD());
+        getCommand("report").setExecutor(new ReportCMD(this));
         config = getConfig();
 
     }

@@ -18,15 +18,16 @@ public class BugReport {
         this.server = server;
         this.reporter = reporter;
         this.issue = issue;
+        this.avatarUrl = avatarUrl;
+        this.userName = userName;
 
     }
 
     public WebhookEmbed buildEmbed() {
 
-
         WebhookEmbedBuilder builder = new WebhookEmbedBuilder();
         builder.setColor(0x4896a2);
-        builder.setDescription("HiberniaReports v1.0.0 by https://paradaux.io");;
+
         builder.addField(new WebhookEmbed.EmbedField(true, "Server: ", server));
         builder.addField(new WebhookEmbed.EmbedField(true, "Reported by: ", reporter));
         builder.addField(new WebhookEmbed.EmbedField(false, "Issue: ", issue));
@@ -35,6 +36,7 @@ public class BugReport {
 
     public WebhookMessage buildMessage() {
 
+        System.out.println(avatarUrl);
         WebhookMessageBuilder builder = new WebhookMessageBuilder();
         builder.addEmbeds(buildEmbed());
         builder.setAvatarUrl(avatarUrl);

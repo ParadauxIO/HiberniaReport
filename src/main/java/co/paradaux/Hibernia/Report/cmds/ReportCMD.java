@@ -4,54 +4,95 @@ import club.minnced.discord.webhook.WebhookClient;
 import club.minnced.discord.webhook.WebhookClientBuilder;
 import co.paradaux.Hibernia.Report.Report;
 import co.paradaux.Hibernia.Report.api.BugReport;
+import co.paradaux.Hibernia.Report.api.PlayerReport;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.plugin.Plugin;
+
+import javax.annotation.Nullable;
 
 public class ReportCMD implements CommandExecutor {
+    FileConfiguration config;
+    Plugin plugin;
+
+    public ReportCMD(Plugin plugin) {
+        this.plugin = plugin;
+    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        FileConfiguration config = Report.getConfigFile();
-        String webhook = config.getString("settings.webhook-url");
-        String servername = config.getString("settings.server-name");
-        String avatarUrl = config.getString("settings.avatar-url");
-        String title = config.getString("bug-report.title");
 
-        if(webhook.equalsIgnoreCase("")) {
-            sender.sendMessage("INVALID WEBHOOK");
+        config = Report.getConfigFile();
+
+        if (config.getString("settings.webhook-url") == null) {
+            sender.sendMessage(ChatColor.RED + "You forgot to set your webhook url in the configuration file.");
+            return true;
         }
+
+        @Nullable
+        String webhook = config.getString("settings.webhook-url");
+        @Nullable
+        String servername = config.getString("settings.server-name");
+        @Nullable
+        String avatarUrl = config.getString("settings.avatar-url");
+        @Nullable
+        String brtitle = config.getString("bug-report.username");
+        @Nullable
+        String prtitle = config.getString("player-report.username");
+        @Nullable
+        String reportSentMsg = ChatColor.translateAlternateColorCodes('&', config.getString("messages.report-sent"));
 
         if (args.length <= 2) {
-            return false;
+            sendHelpMenu(sender);
+            return true;
         }
 
-        System.out.println("Webhook: " + webhook);
-        System.out.println("Server Name: " + servername);
+        WebhookClient client = new WebhookClientBuilder(webhook).build();
 
         if (args[0].equalsIgnoreCase("bug")) {
-            WebhookClient client = new WebhookClientBuilder(webhook).build();
 
-            BugReport issue = new BugReport(servername, sender.getName(), getIssue(args, 1), avatarUrl, title);
+            BugReport issue = new BugReport(servername, sender.getName(), getIssue(args, 1), avatarUrl, brtitle);
 
-            client.send(issue.buildMessage());
+            Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> client.send(issue.buildMessage()));
+            sender.sendMessage(reportSentMsg);
+            return true;
+
+        } else if (args[0].equalsIgnoreCase("player")) {
+
+            PlayerReport issue = new PlayerReport(servername, sender.getName(), args[1], getIssue(args, 2), avatarUrl, prtitle);
+
+            Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> client.send(issue.buildMessage()));
+            sender.sendMessage(reportSentMsg);
+            return true;
+
+        } else {
+
+            sendHelpMenu(sender);
+            return true;
 
         }
 
-        return true;
     }
 
+    public void sendHelpMenu(CommandSender sender) {
+        config = Report.getConfigFile();
 
+        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', config.getString("messages.help-menu-one")));
+        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', config.getString("messages.help-menu-two")));
+        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', config.getString("messages.help-menu-three")));
 
+    }
 
-    public String getIssue(String[] args, int num){ //You can use a method if you want
-        StringBuilder sb = new StringBuilder(); //We make a String Builder
-        for(int i = num; i < args.length; i++) { //We get all the arguments with a for loop
-            sb.append(args[i]).append(" "); //We add the argument and the space
+    public String getIssue(String[] args, int num){
+        StringBuilder sb = new StringBuilder();
+        for(int i = num; i < args.length; i++) {
+            sb.append(args[i]).append(" ");
         }
-        return sb.toString().trim(); //We return the message
+        return sb.toString().trim();
     }
-
 
 }

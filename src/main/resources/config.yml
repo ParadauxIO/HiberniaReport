@@ -1,9 +1,30 @@
+# Thanks for using HiberniaReport. This is version 1.0.0, and as such there very well could be bugs.
+# Please, don't hesitate to join my development discord to get support and suggest features.
+# And, Leave a review if you're happy with the plugin :)
+
 settings:
+  # This is the webhook link generated in the channel you wish to send reports to.
   webhook-url: ""
+  # Server name specified in individual reports (Useful for Velocity / Bungeecord / Waterfall Networks)
   server-name: "My Minecraft Server"
-  avatar-url: ""
+  # Avatar used for the reports, by default the same cyan discord icon as used on my website.
+  avatar-url: "https://i.paradaux.io/i/4vvj9.png"
 
 bug-report:
+  # Username used for Bug Reports
   username: "HiberniaReport » New Bug Report."
 
+player-report:
+  # Username used for Player Reports.
+  username: "HiberniaReport » New Player Report."
+
+messages:
+  # Message sent to the user following a report being sent. Feel free to use chat colors here.
+  report-sent: "&7{&c!&7} &7Thanks for your &creport&7. It has been sent to the server administrators, &cprivately&7. "
+  # Messages sent when an invalid subcommand is used or the command is ran without arguments.
+  help-menu-one: "&7{&cReport&7} This command is for reporting &cbugs &7and &cplayers&7. "
+  help-menu-two: "&c/report bug &7<describe the bug>"
+  help-menu-three: "&c/report player &7<their username> <reason for reporting them>"
+
+# Touching this could potentially break your configuration in future versions.
 config-version: 1.0
