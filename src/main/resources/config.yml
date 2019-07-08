@@ -1,0 +1,9 @@
+settings:
+  webhook-url: ""
+  server-name: "My Minecraft Server"
+  avatar-url: ""
+
+bug-report:
+  username: "HiberniaReport » New Bug Report."
+
+config-version: 1.0

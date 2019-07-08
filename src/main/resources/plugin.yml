@@ -1,0 +1,9 @@
+name: Report
+version: ${project.version}
+main: co.paradaux.Hibernia.Report.Report
+api-version: 1.13
+commands:
+  report:
+    usage: /report <bug/player> (<player>) <issue>
+    permission: hibernia.report
+
