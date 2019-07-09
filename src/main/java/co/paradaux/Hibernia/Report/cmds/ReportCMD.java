@@ -11,6 +11,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
 import javax.annotation.Nullable;
@@ -28,22 +29,21 @@ public class ReportCMD implements CommandExecutor {
 
         config = Report.getConfigFile();
 
+        if (!sender.hasPermission("hibernia.report")) {
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', config.getString("messages.no-permission")));
+            return true;
+        }
+
         if (config.getString("settings.webhook-url") == null) {
             sender.sendMessage(ChatColor.RED + "You forgot to set your webhook url in the configuration file.");
             return true;
         }
 
-        @Nullable
         String webhook = config.getString("settings.webhook-url");
-        @Nullable
         String servername = config.getString("settings.server-name");
-        @Nullable
         String avatarUrl = config.getString("settings.avatar-url");
-        @Nullable
         String brtitle = config.getString("bug-report.username");
-        @Nullable
         String prtitle = config.getString("player-report.username");
-        @Nullable
         String reportSentMsg = ChatColor.translateAlternateColorCodes('&', config.getString("messages.report-sent"));
 
         if (args.length <= 2) {

@@ -5,5 +5,4 @@ api-version: 1.13
 commands:
   report:
     usage: /report <bug/player> (<player>) <issue>
-    permission: hibernia.report
 

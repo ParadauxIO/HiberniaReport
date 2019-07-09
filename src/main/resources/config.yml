@@ -25,6 +25,7 @@ messages:
   help-menu-one: "&7{&cReport&7} This command is for reporting &cbugs &7and &cplayers&7. "
   help-menu-two: "&c/report bug &7<describe the bug>"
   help-menu-three: "&c/report player &7<their username> <reason for reporting them>"
+  no-permission: "&7{&c!&7} You need the following permission: &chibernia.report"
 
 # Touching this could potentially break your configuration in future versions.
 config-version: 1.0
