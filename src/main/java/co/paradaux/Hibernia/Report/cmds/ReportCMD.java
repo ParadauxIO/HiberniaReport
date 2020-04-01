@@ -11,10 +11,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
-
-import javax.annotation.Nullable;
 
 public class ReportCMD implements CommandExecutor {
     FileConfiguration config;
@@ -46,7 +43,7 @@ public class ReportCMD implements CommandExecutor {
         String prtitle = config.getString("player-report.username");
         String reportSentMsg = ChatColor.translateAlternateColorCodes('&', config.getString("messages.report-sent"));
 
-        if (args.length <= 2) {
+        if (args.length < 2) {
             sendHelpMenu(sender);
             return true;
         }

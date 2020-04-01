@@ -36,7 +36,6 @@ public class BugReport {
 
     public WebhookMessage buildMessage() {
 
-        System.out.println(avatarUrl);
         WebhookMessageBuilder builder = new WebhookMessageBuilder();
         builder.addEmbeds(buildEmbed());
         builder.setAvatarUrl(avatarUrl);
