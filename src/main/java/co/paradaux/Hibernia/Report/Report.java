@@ -2,7 +2,6 @@ package co.paradaux.Hibernia.Report;
 
 import co.paradaux.Hibernia.Report.cmds.ReportCMD;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Report extends JavaPlugin {
@@ -22,9 +21,5 @@ public final class Report extends JavaPlugin {
     }
 
     @Override
-    public void onDisable() {
-
-        // Wow. Much code.
-
-    }
+    public void onDisable() {}
 }
