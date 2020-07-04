@@ -9,15 +9,17 @@ settings:
   # Server name specified in individual reports (Useful for Velocity / Bungeecord / Waterfall Networks)
   server-name: "My Minecraft Server"
   # Avatar used for the reports, by default the same cyan discord icon as used on my website.
-  avatar-url: "https://i.paradaux.io/i/4vvj9.png"
+  avatar-url: "https://cdn.paradaux.io/static/plugin-branding/hiberniareport/report.png"
 
 bug-report:
+  # Due to how discord strings messages together, the username may not always be visible, best to leave this generic between the two.
+
   # Username used for Bug Reports
-  username: "HiberniaReport » New Bug Report."
+  username: "Report » New Report."
 
 player-report:
   # Username used for Player Reports.
-  username: "HiberniaReport » New Player Report."
+  username: "Report » New Report."
 
 messages:
   # Message sent to the user following a report being sent. Feel free to use chat colors here.
