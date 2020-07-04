@@ -37,14 +37,16 @@ public final class Report extends JavaPlugin {
 
     @Override
     public void onEnable() {
-
+        logger = this.getLogger();
         config = getConfig();
         configurationCache = new ConfigurationCache(config);
         taskChainFactory = BukkitTaskChainFactory.create(this);
 
         startupMessage();
+        versionChecker();
         handleConfiguration();
         registerCommands();
+
     }
 
     @Override
