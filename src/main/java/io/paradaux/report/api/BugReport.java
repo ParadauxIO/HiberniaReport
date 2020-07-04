@@ -40,14 +40,21 @@ public class BugReport extends GenericReport {
         String userIconUrl = baseUserIconUrl.replace("%uuid%", reporterUUID);
         String UserUrl = baseUserUrl + reporter;
 
-        return new WebhookEmbedBuilder()
-                .setAuthor(new WebhookEmbed.EmbedAuthor(reporter + " has reported a bug.", userIconUrl, UserUrl))
+        WebhookEmbedBuilder embedBuilder = new WebhookEmbedBuilder()
                 .setDescription("**Issue**: " + issue)
                 .setColor(0x4896a2)
                 .addField(new WebhookEmbed.EmbedField(true, "Server:", server))
-                .addField(new WebhookEmbed.EmbedField(true, "UUID:", reporterUUID))
-                .addField(new WebhookEmbed.EmbedField(true, "Reporter:", reporter))
-                .build();
+                .addField(new WebhookEmbed.EmbedField(true, "Reporter:", reporter));
+
+        if(!(reporterUUID.equals("Console"))) {
+            embedBuilder
+                    .setAuthor(new WebhookEmbed.EmbedAuthor(reporter + " has reported a bug.", userIconUrl, UserUrl))
+                    .addField(new WebhookEmbed.EmbedField(true, "UUID:", reporterUUID));
+        } else {
+            embedBuilder.setAuthor(new WebhookEmbed.EmbedAuthor("Console has reported a bug.", "", ""));
+        }
+
+        return embedBuilder.build();
     }
 
     @Override

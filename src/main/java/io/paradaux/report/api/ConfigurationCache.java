@@ -47,10 +47,11 @@ public class ConfigurationCache {
     public String getBugUsername() { return bugreport_username; }
     public String getPlayerUsername() { return playerreport_username; }
 
+    public String getMessageHelpMenu() {
+        return messages_helpMenuOne + "\n" + messages_helpMenuTwo + "\n" + messages_helpMenuThree;
+    }
+
     public String getMessageReportSent() { return messages_reportSent; }
-    public String getMessageHelpMenuOne() { return messages_helpMenuOne; }
-    public String getMessageHelpMenuTwo() { return messages_helpMenuTwo; }
-    public String getMessageHelpMenuThree() { return messages_helpMenuThree;}
     public String getMessageNoPermission() { return messages_noPermission; }
 
 }

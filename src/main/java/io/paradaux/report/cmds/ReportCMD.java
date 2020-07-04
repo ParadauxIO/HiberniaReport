@@ -22,25 +22,26 @@ public class ReportCMD implements CommandExecutor {
     ConfigurationCache config;
     GenericReport report;
 
+    String webhook, server, reporter, reporterUUID, brtitle, prtitle, reportSentMsg;
+
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
-        if (!(sender instanceof Player)) {
-            System.out.println("Stop reporting from console.");
-            return true;
-        }
-
         config = Report.getConfigurationCache();
+        webhook = config.getWebhookUrl();
+        server = config.getServerName();
+        brtitle = config.getBugUsername();
+        prtitle = config.getPlayerUsername();
+        reportSentMsg = colourise(config.getMessageReportSent());
 
-        String webhook = config.getWebhookUrl();
-        String server = config.getServerName();
-        String reporter = sender.getName();
-        String reporterUUID = ((Player) sender).getUniqueId().toString();
-        String brtitle = config.getBugUsername();
-        String prtitle = config.getPlayerUsername();
-
-        String reportSentMsg = colourise(config.getMessageReportSent());
+        if (sender instanceof Player) {
+            reporter = sender.getName();
+            reporterUUID = ((Player) sender).getUniqueId().toString();
+        } else {
+            reporter = "Console";
+            reporterUUID = "Console";
+        }
 
         if (!sender.hasPermission("hibernia.report")) {
             sender.sendMessage(colourise(config.getMessageNoPermission()));
@@ -88,8 +89,7 @@ public class ReportCMD implements CommandExecutor {
     }
 
     public void sendHelpMenu(CommandSender sender) {
-        String helpmenu = config.getMessageHelpMenuOne() + "\n" + config.getMessageHelpMenuTwo() + "\n" + config.getMessageHelpMenuThree();
-        sender.sendMessage(colourise(helpmenu));
+        sender.sendMessage(colourise(config.getMessageHelpMenu()));
     }
 
     public String colourise(String s) {
