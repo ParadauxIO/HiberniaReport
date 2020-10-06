@@ -56,7 +56,7 @@ public final class Report extends JavaPlugin {
     public void startupMessage() {
         logger.log(Level.FINE, "\n" +
                 "+ ------------------------------------ +\n" +
-                "|     Running HiberniaReport v1.1.0    |\n" +
+                "|     Running HiberniaReport v1.2.0    |\n" +
                 "|       © Rían Errity (Paradaux)       |\n" +
                 "|         https://paradaux.io          |\n" +
                 "+ ------------------------------------ +\n" +

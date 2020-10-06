@@ -18,6 +18,9 @@ bug-report:
   # Username used for Bug Reports
   username: "Report » New Report."
 
+  #
+
+
 player-report:
   # Username used for Player Reports.
   username: "Report » New Report."
