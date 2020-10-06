@@ -43,7 +43,7 @@
                             <relocations>
                                 <relocation>
                                     <pattern>co.aikar.taskchain</pattern>
-                                    <shadedPattern>co.paradaux.Hibernia.Report.taskchain</shadedPattern>
+                                    <shadedPattern>io.paradaux.Hibernia.Report.taskchain</shadedPattern>
                                 </relocation>
                             </relocations>
                         </configuration>
@@ -58,6 +58,7 @@
             </resource>
         </resources>
     </build>
+
     <repositories>
         <repository>
             <id>spigot-repo</id>
@@ -75,8 +76,6 @@
             <url>https://papermc.io/repo/repository/maven-public/</url>
         </repository>
     </repositories>
-
-    <dependencies>
 
     <dependencies>
         <dependency>
@@ -104,13 +103,12 @@
             <artifactId>taskchain-bukkit</artifactId>
             <version>3.7.2</version>
         </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-
-
     </dependencies>
 </project>
